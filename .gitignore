@@ -1,5 +1,7 @@
 #Bazel
 */bazel-*
+bazel-*
+bazel-*/*
 
 #VSCode 
 .vscode/*
