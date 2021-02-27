@@ -4,8 +4,6 @@
 #include "vmfunctions/common.hpp"
 #include "vmfunctions/tests/tests_common.hpp"
 
-#include <iostream>
-
 using int_types = std::tuple<int, long, unsigned int, unsigned long>;
 
 TEMPLATE_LIST_TEST_CASE("factorials", "[factorial]", int_types) {
@@ -16,9 +14,13 @@ TEMPLATE_LIST_TEST_CASE("factorials", "[factorial]", int_types) {
     REQUIRE(factorial<TestType>(3) == 6ul);
 }
 
-using fpt_types = std::tuple<std::tuple<int, float>, std::tuple<long, double>>;
+using test_types = std::tuple<
+                    std::tuple<int, float>,
+                    std::tuple<int, double>,
+                    std::tuple<long, float>,
+                    std::tuple<long, double>>;
 
-TEMPLATE_LIST_TEST_CASE("fpt reverse factorials", "[factorial]", fpt_types) {
+TEMPLATE_LIST_TEST_CASE("reverse factorials", "[rfactorial]", test_types) {
     using namespace vmfunctions::common;
     using I = std::tuple_element_t<0, TestType>;
     using F = std::tuple_element_t<1, TestType>;

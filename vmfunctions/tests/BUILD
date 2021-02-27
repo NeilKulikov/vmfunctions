@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_test")
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
 
 cc_library(
     name = "common",
@@ -12,7 +12,7 @@ cc_library(
 
 cc_test(
     name = "common-test",
-    srcs = ["common_test.cpp"],
+    srcs = glob(["*_test.cpp"]),
     deps = [
         ":common",
         "//vmfunctions:root",
