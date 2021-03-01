@@ -19,6 +19,16 @@ constexpr F rfactorial(I deg) {
     return F(1) / F(factorial<I>(deg)); 
 }
 
+template<typename F, int pow>
+constexpr F power(F arg) {
+    return pow ? arg * power<F, pow - 1>(arg) : F(1); 
+}
+
+template<typename F>
+constexpr F power(F arg, int pow) {
+    return pow ? arg * power<F>(arg, pow - 1) : F(1); 
+}
+
 } // vmfunctions::common
 
 #endif // VMFUNCTIONS_COMMON

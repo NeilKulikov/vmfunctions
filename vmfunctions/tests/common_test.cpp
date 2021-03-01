@@ -34,3 +34,17 @@ TEMPLATE_LIST_TEST_CASE("reverse factorials", "[rfactorial]", test_types) {
     CAPTURE(F(1. / 6.), rfact(3));
     ALMOST_EQUAL(F(1. / 6.), rfact(3));
 }
+
+using fpt_types = std::tuple<float, double>;
+
+TEMPLATE_LIST_TEST_CASE("power functional", "[power]", fpt_types) {
+    using namespace vmfunctions::common;
+    ALMOST_EQUAL(TestType(1), (power<TestType>(1, 0)));
+    ALMOST_EQUAL(TestType(1), (power<TestType>(1, 10)));
+    ALMOST_EQUAL(TestType(8), (power<TestType>(2, 3)));
+    ALMOST_EQUAL(TestType(32), (power<TestType>(2, 5)));
+    ALMOST_EQUAL(TestType(6.25), (power<TestType>(2.5, 2)));
+    ALMOST_EQUAL(TestType(39.0625), (power<TestType>(2.5, 4)));
+    ALMOST_EQUAL(TestType(1), (power<TestType>(3, 0)));
+    ALMOST_EQUAL(TestType(81), (power<TestType>(3, 4)));
+}

@@ -1,7 +1,7 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
-    name = "root",
+    name = "common",
     srcs = [],
     hdrs = glob(["*.hpp"]),
     visibility = ["//visibility:public"],

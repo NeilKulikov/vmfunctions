@@ -11,7 +11,7 @@ using test_types = std::tuple<
                     std::tuple<long, float>,
                     std::tuple<long, double>>;
 
-TEMPLATE_LIST_TEST_CASE("cos coeffients", "[coefs]", test_types) {
+TEMPLATE_LIST_TEST_CASE("cos coeffients", "[cos][coefs]", test_types) {
     using namespace vmfunctions::trigonometry;
     using I = std::tuple_element_t<0, TestType>;
     using F = std::tuple_element_t<1, TestType>;
@@ -25,7 +25,7 @@ TEMPLATE_LIST_TEST_CASE("cos coeffients", "[coefs]", test_types) {
     ALMOST_EQUAL(ccoef(6), F(-1. / 720.));
 }
 
-TEMPLATE_LIST_TEST_CASE("sin coeffients", "[coefs]", test_types) {
+TEMPLATE_LIST_TEST_CASE("sin coeffients", "[sin][coefs]", test_types) {
     using namespace vmfunctions::trigonometry;
     using I = std::tuple_element_t<0, TestType>;
     using F = std::tuple_element_t<1, TestType>;

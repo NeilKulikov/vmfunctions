@@ -12,10 +12,10 @@ cc_library(
 
 cc_test(
     name = "common-test",
-    srcs = glob(["*_test.cpp"]),
+    srcs = glob(["common_test.cpp"]),
     deps = [
         ":common",
-        "//vmfunctions:root",
+        "//vmfunctions:common",
         "@catch2//:catch2",
     ],
     visibility = ["//visibility:public"],
