@@ -22,6 +22,6 @@ TEMPLATE_LIST_TEST_CASE("sin series", "[sin][series]", test_types) {
         const TestType sin = std::sin(x);
         const TestType res = sinu(x);
         CAPTURE(x, sin, res);
-        ALMOST_EQUAL_CUSTOM(res, sin, TestType(1.e-2), TestType(1.e-5));
+        ALMOST_EQUAL_CUSTOM(res, sin, TestType(1.e-3), TestType(1.e-5));
     }
 }
