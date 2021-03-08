@@ -15,3 +15,15 @@ cc_library(
     deps = [":coefs"],
     visibility = ["//visibility:public"],
 )
+
+cc_library(
+    name = "unbalanced",
+    srcs = [],
+    hdrs = glob(["*_unbalanced.hpp"]),
+    deps = [
+                "//vmfunctions:consts",
+                "//vmfunctions:common",
+                ":series", 
+            ],
+    visibility = ["//visibility:public"],
+)

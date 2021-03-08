@@ -12,7 +12,7 @@ cc_library(
 
 cc_test(
     name = "common-test",
-    srcs = glob(["common_test.cpp"]),
+    srcs = glob(["*_test.cpp"]),
     deps = [
         ":common",
         "//vmfunctions:common",

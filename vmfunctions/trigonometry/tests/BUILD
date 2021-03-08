@@ -44,3 +44,14 @@ cc_test(
     ],
     visibility = ["//visibility:public"],
 )
+
+cc_test(
+    name = "unbalanced-test",
+    srcs = glob(["*_unbalanced_test.cpp"]),
+    deps = [
+        "//vmfunctions/trigonometry:unbalanced",
+        "//vmfunctions/tests:common",
+        "@catch2//:catch2",
+    ],
+    visibility = ["//visibility:public"],
+)
