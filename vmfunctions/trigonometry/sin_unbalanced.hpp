@@ -25,7 +25,7 @@ inline F sinu(F arg) {
     // const I aper = I(arg * dpi<F>) % 4;
     const I iarg = I(pih<F> * arg);
     const I aper = iarg & I(3);
-    const F argshift = shifts[aper];
+    const F argshift = shifts[aper] + F(iarg / 4) * dpi<F>;
     constexpr int asshift = 8 * sizeof(F) - 1;
     const auto argsign = 
                     reinterpret<F>((aper ^ 1) << asshift);

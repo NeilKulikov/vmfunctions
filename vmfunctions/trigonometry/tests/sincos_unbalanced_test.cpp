@@ -1,10 +1,13 @@
-#define CATCH_CONFIG_MAIN
+#ifndef CATCH_CONFIG_MAIN
+    #define CATCH_CONFIG_MAIN
+#endif
+
 #include "catch2/catch.hpp"
+
+#include <cmath>
 
 #include "vmfunctions/tests/tests_common.hpp"
 #include "vmfunctions/trigonometry/sin_unbalanced.hpp"
-
-#include <cmath>
 
 using test_types = std::tuple<float, double>;
 
@@ -12,7 +15,7 @@ TEMPLATE_LIST_TEST_CASE("sin series", "[sin][series]", test_types) {
     const auto sinu = std::bind(
         vmfunctions::trigonometry::sinu<TestType>, std::placeholders::_1);
     const int nsteps = 1024;
-    const TestType from = 0, to = +2 *  M_PI;
+    const TestType from = 0, to = +5 *  M_PI;
     const TestType step = (to - from) / TestType(nsteps);
     for(int i = 0; i < nsteps; ++i) {
         const TestType x = from + step * TestType(i);

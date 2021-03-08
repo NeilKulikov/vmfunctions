@@ -1,4 +1,7 @@
-#define CATCH_CONFIG_MAIN
+#ifndef CATCH_CONFIG_MAIN
+    #define CATCH_CONFIG_MAIN
+#endif
+
 #include "catch2/catch.hpp"
 
 #include "vmfunctions/tests/tests_common.hpp"

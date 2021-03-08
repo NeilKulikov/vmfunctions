@@ -20,3 +20,11 @@ cc_test(
     ],
     visibility = ["//visibility:public"],
 )
+
+cc_test(
+    name = "test",
+    deps = [
+        "common-test",
+    ],
+    visibility = ["//visibility:public"],
+)
