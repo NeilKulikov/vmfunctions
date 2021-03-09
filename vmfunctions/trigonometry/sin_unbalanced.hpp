@@ -16,7 +16,7 @@ inline F sinn(F arg) {
 }
 
 template<typename F, int deg = sizeof(F)>
-inline F sinu(F arg) {
+inline F sinp(F arg) {
     using namespace vmfunctions::common;
     using namespace vmfunctions::constants;
     constexpr F shifts[] = {0, pi<F>, pi<F>, dpi<F>};
@@ -34,6 +34,11 @@ inline F sinu(F arg) {
                     reinterpret<F>((aper & 2) << gsshift);
     return 
         XOR(sins<F, deg>(XOR(argshift - arg, argsign)), gensign);
+}
+
+template<typename F, int deg = sizeof(F)>
+inline F sinu(F arg) {
+    return arg < F(0) ? -sinp<F, deg>(-arg) : sinp<F, deg>(arg);
 }
 
 } // vmfunctions::trigonometry
