@@ -55,14 +55,3 @@ cc_test(
     ],
     visibility = ["//visibility:public"],
 )
-
-cc_test(
-    name = "test",
-    deps = [
-        "coefs-test",
-        "series-test",
-        "residue-test",
-        "unbalanced-test",
-    ],
-    visibility = ["//visibility:public"],
-)
