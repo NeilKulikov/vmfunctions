@@ -15,15 +15,23 @@
 
 using test_types = std::tuple<float, double>;
 
+#define SINU vmfunctions::trigonometry::sinu<TestType>
+
 TEMPLATE_LIST_TEST_CASE("sin unbalanced", "[sin][unbalanced]", test_types) {
-    const auto sinu = std::bind(
-        vmfunctions::trigonometry::sinu<TestType>, std::placeholders::_1);
-    
-    BENCHMARK("Sin Unbalanced 1. - 1") {
-        return sinu(1.);
+    BENCHMARK("Sin Series 1. - 1") {
+        return SINU(1.);
     };
 
-    BENCHMARK("Loop - 1024") {
+    BENCHMARK("Sin Std 1. - 1") {
+        if constexpr (std::is_same<float, TestType>::value) {
+            return std::sinf(1.);
+        }
+        else {
+            return std::sin(1.);
+        }
+    };
+
+    BENCHMARK("Loop Series - 1024") {
         constexpr int nsteps = 1024;
         volatile TestType res = 0.;
         for(int i = 0; i < nsteps; ++i) {
@@ -31,11 +39,11 @@ TEMPLATE_LIST_TEST_CASE("sin unbalanced", "[sin][unbalanced]", test_types) {
         }
     };
 
-    BENCHMARK("Sin Unbalanced 1. - 1024") {
+    BENCHMARK("Sin Series 1. - 1024") {
         constexpr int nsteps = 1024;
         volatile TestType res = 0.;
         for(int i = 0; i < nsteps; ++i) {
-            res += sinu(1.);
+            res += SINU(1.);
         }
     };
 
