@@ -18,7 +18,7 @@ using test_types = std::tuple<float, double>;
 #define SINU vmfunctions::trigonometry::sinu<TestType>
 
 TEMPLATE_LIST_TEST_CASE("sin unbalanced", "[sin][unbalanced]", test_types) {
-    BENCHMARK("Sin Series 1. - 1") {
+    BENCHMARK("Sin Unbalanced 1. - 1") {
         return SINU(1.);
     };
 
@@ -31,7 +31,7 @@ TEMPLATE_LIST_TEST_CASE("sin unbalanced", "[sin][unbalanced]", test_types) {
         }
     };
 
-    BENCHMARK("Loop Series - 1024") {
+    BENCHMARK("Loop Unbalanced - 1024") {
         constexpr int nsteps = 1024;
         volatile TestType res = 0.;
         for(int i = 0; i < nsteps; ++i) {
@@ -39,7 +39,7 @@ TEMPLATE_LIST_TEST_CASE("sin unbalanced", "[sin][unbalanced]", test_types) {
         }
     };
 
-    BENCHMARK("Sin Series 1. - 1024") {
+    BENCHMARK("Sin Unbalanced 1. - 1024") {
         constexpr int nsteps = 1024;
         volatile TestType res = 0.;
         for(int i = 0; i < nsteps; ++i) {
@@ -56,6 +56,45 @@ TEMPLATE_LIST_TEST_CASE("sin unbalanced", "[sin][unbalanced]", test_types) {
             }
             if constexpr (std::is_same<double, TestType>::value) {
                 res += std::sin(1.);
+            }
+        }
+    };
+}
+
+TEMPLATE_LIST_TEST_CASE("sin ynbalanced transform", "[sin][unbalanced][wise]", test_types) {
+    constexpr int nsteps = 1024;
+    std::vector<TestType> inp(nsteps, TestType(1));
+    std::vector<TestType> out(nsteps, TestType(1));
+    
+    BENCHMARK("Sin Unbalanced - 1024") {
+        std::transform(inp.cbegin(), inp.cend(), out.begin(), SINU);
+    };
+
+    BENCHMARK("Sin Unbalanced Direct - 1024") {
+        for(int i = 0; i < nsteps; ++i) {
+            out[i] = SINU(inp[i]);
+        }
+    };
+
+    BENCHMARK("Sin Std - 1024") {
+        constexpr auto sin = [] (auto x) { 
+                if constexpr (std::is_same<float, TestType>::value) {
+                    return std::sinf(1.);
+                }
+                else {
+                    return std::sin(1.);
+                }
+            };
+        std::transform(inp.cbegin(), inp.cend(), out.begin(), sin);
+    };
+
+    BENCHMARK("Sin Std Direct - 1024") {
+        for(int i = 0; i < nsteps; ++i) {
+            if constexpr (std::is_same<float, TestType>::value) {
+                out[i] = std::sinf(inp[i]);
+            }
+            else {
+                out[i] = std::sin(inp[i]);
             }
         }
     };
