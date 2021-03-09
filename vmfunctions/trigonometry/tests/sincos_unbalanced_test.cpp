@@ -22,7 +22,6 @@ TEMPLATE_LIST_TEST_CASE("sin series", "[sin][series]", test_types) {
         const TestType x = from + step * TestType(i);
         const TestType sin = std::sin(x);
         const TestType res = sinu(x);
-        CAPTURE(x, sin, res);
         const auto diff = res - sin;
         REQUIRE(-atol <= diff);
         REQUIRE(diff <= +atol);
