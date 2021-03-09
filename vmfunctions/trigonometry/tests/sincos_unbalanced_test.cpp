@@ -11,7 +11,7 @@
 
 using test_types = std::tuple<float, double>;
 
-TEMPLATE_LIST_TEST_CASE("sin series", "[sin][series]", test_types) {
+TEMPLATE_LIST_TEST_CASE("sin unbalanced", "[sin][unbalanced]", test_types) {
     const auto sinu = std::bind(
         vmfunctions::trigonometry::sinu<TestType>, std::placeholders::_1);
     constexpr int nsteps = 8192;
